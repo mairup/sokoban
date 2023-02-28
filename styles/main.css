@@ -1,0 +1,12 @@
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+}
+#canvas {
+  width: 50vw;
+  background-color: beige;
+  display: flex;
+  align-self: center;
+}
