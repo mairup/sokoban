@@ -1,2 +1,1 @@
-# maze
- maze game
+Sokoban game
