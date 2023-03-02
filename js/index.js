@@ -52,7 +52,7 @@ function drawBlock(item, i, j) {
 
 function drawWall(offsetX, offsetY, width, height) {
   ctx.fillStyle = "black";
-  ctx.fillRect(offsetX + 5, offsetY + 5, width - 10, height - 10);
+  ctx.fillRect(offsetX + width / 10, offsetY + height / 10, width - width / 5, height - height / 5);
 }
 
 function drawMan(offsetX, offsetY, width, height) {
@@ -61,7 +61,7 @@ function drawMan(offsetX, offsetY, width, height) {
   ctx.arc(
     offsetX + width / 2,
     offsetY + height / 2,
-    width / 2 - 20,
+    width / 2 - width / 4,
     0,
     2 * Math.PI
   );
@@ -76,12 +76,12 @@ function drawManOnPoint(offsetX, offsetY, width, height) {
 
 function drawBox(offsetX, offsetY, width, height) {
   ctx.fillStyle = "#8b512a";
-  ctx.fillRect(offsetX + 20, offsetY + 20, width - 40, height - 40);
+  ctx.fillRect(offsetX + width / 4, offsetY + height / 4, width - width / 2, height - height / 2);
 }
 
 function drawEndPoint(offsetX, offsetY, width, height) {
   ctx.fillStyle = "green";
-  ctx.fillRect(offsetX + 5, offsetY + 5, width - 10, height - 10);
+  ctx.fillRect(offsetX + width / 10, offsetY + height / 10, width - width / 5, height - height / 5);
 }
 
 function drawBoxOnEndPoint(offsetX, offsetY, width, height) {
