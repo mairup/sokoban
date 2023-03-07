@@ -5,7 +5,7 @@ body {
   display: flex;
 }
 #canvas {
-  width: 50vw;
+  height: 100vh;
   background-color: beige;
   display: flex;
   align-self: center;
