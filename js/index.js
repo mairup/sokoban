@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 const textarea = document.getElementById("a");
 let i = 1;
 let man = [0, 0];
+let moves = "";
 
 let currentLevel = levels[0].split("\n");
 drawLevel(currentLevel);
@@ -27,7 +28,6 @@ function drawBlock(item, i, j) {
   if (item == "S" || item == "$") {
     man[0] = i;
     man[1] = j;
-    console.log(man);
   }
 
   switch (item) {
@@ -110,6 +110,7 @@ textarea.addEventListener("input", () => {
 })
 
 canvas.addEventListener("click", () => {
+  moves = ""
   currentLevel = levels[i].split("\n")
   drawLevel(currentLevel)
   i++;
@@ -117,45 +118,46 @@ canvas.addEventListener("click", () => {
 })
 
 function move(type, direction) {
-  let nextPos = [0, 0];
-  nextPos[0] = man[0];
-  nextPos[1] = man[1];
-
-  let nextNextPos = [0, 0];
-  nextNextPos[0] = man[0];
-  nextNextPos[1] = man[1];
+  let nextPos = man.map((x) => x);
+  let nextNextPos = man.map((x) => x);
+  let tmpPos = man.map((x) => x);
+  let tmpDir;
 
   switch (direction) {
     case "up":
       nextPos[0] -= 1;
       nextNextPos[0] -= 2;
-
+      tmpDir = "G"
       break;
 
     case "down":
       nextPos[0] += 1;
       nextNextPos[0] += 2;
-
+      tmpDir = "D"
       break;
 
     case "left":
       nextPos[1] -= 1;
       nextNextPos[1] -= 2;
-
+      tmpDir = "L"
       break;
 
     case "right":
       nextPos[1] += 1;
       nextNextPos[1] += 2;
-
+      tmpDir = "R"
       break;
 
     default:
       break;
   }
 
-  console.log("currentLevel[" + man[0] + "][" + man[1] + "]");
-  console.log("currentLevel[" + nextPos[0] + "][" + nextPos[1] + "]");
+  if (currentLevel[nextPos[0]][nextPos[1]] == "Z" || currentLevel[nextPos[0]][nextPos[1]] == "%")
+    moves += type
+  else moves += "0"
+
+  moves += tmpDir;
+
   switch (currentLevel[nextPos[0]][nextPos[1]]) {
     case ".":
     case "O":
@@ -168,8 +170,6 @@ function move(type, direction) {
         currentLevel[man[0]] = setCharAt(currentLevel[man[0]], man[1], '.');
       else
         currentLevel[man[0]] = setCharAt(currentLevel[man[0]], man[1], 'O');
-
-      console.log(currentLevel[man[0]][man[1]]);
 
       break;
 
@@ -205,30 +205,35 @@ function move(type, direction) {
   }
 
   drawLevel(currentLevel)
-  console.log(currentLevel[man[0]][man[1]]);
+  if (man[0] == tmpPos[0] && man[1] == tmpPos[1])
+    moves = moves.substring(0, moves.length - 2)
+
+  console.log(moves);
 }
 
 document.addEventListener(
   "keypress",
   (event) => {
-    const keyName = event.key;
+    const key = event.key;
 
-    if (keyName === "w")
-      move(1, "up")
-    else if (keyName === "a")
-      move(1, "left")
-    else if (keyName === "s")
-      move(1, "down")
-    else if (keyName === "d")
-      move(1, "right")
-    else if (keyName === "W")
-      move(2, "up")
-    else if (keyName === "A")
-      move(2, "left")
-    else if (keyName === "S")
-      move(2, "down")
-    else if (keyName === "D")
-      move(2, "right")
+    switch (key) {
+      case "w": move(1, "up")
+        break;
+      case "a": move(1, "left")
+        break;
+      case "s": move(1, "down")
+        break;
+      case "d": move(1, "right")
+        break;
+      case "W": move(2, "up")
+        break;
+      case "A": move(2, "left")
+        break;
+      case "S": move(2, "down")
+        break;
+      case "D": move(2, "right")
+        break;
+    }
 
   },
   false
