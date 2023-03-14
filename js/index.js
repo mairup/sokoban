@@ -114,7 +114,7 @@ canvas.addEventListener("click", () => {
   currentLevel = levels[i].split("\n")
   drawLevel(currentLevel)
   i++;
-  if (i == 21) i = 0
+  if (i == levels.length) i = 0
 })
 
 function move(type, direction) {
