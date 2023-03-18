@@ -2,7 +2,8 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const textarea = document.getElementById("a");
 const textareaB = document.getElementById("b");
-let i = 1;
+const levelNum = document.getElementById("levelNum");
+levelNum.value = 0;
 let man = [0, 0];
 let moves = "";
 
@@ -110,19 +111,6 @@ function drawBoxOnEndPoint(offsetX, offsetY, width, height) {
   drawEndPoint(offsetX, offsetY, width, height);
   drawBox(offsetX, offsetY, width, height);
 }
-
-textarea.addEventListener("input", () => {
-  currentLevel = textarea.value.split("\n")
-  drawLevel(currentLevel)
-})
-
-canvas.addEventListener("click", () => {
-  moves = ""
-  currentLevel = levels[i].split("\n")
-  drawLevel(currentLevel)
-  i++;
-  if (i == levels.length) i = 0
-})
 
 function move(type, direction) {
   prevLevel = { ...currentLevel }
@@ -254,17 +242,18 @@ document.addEventListener(
   false
 );
 
+function reloadLevel() {
+  let prevLevel = { ...currentLevel }
+  currentLevel = levels[levelNum.value].split("\n");
+  drawLevel(currentLevel, prevLevel);
+  moves = ""
+  textareaB.value = ""
+}
+
 function executeScript(script) {
   moves = "";
   for (let i = 0; i < script.length; i += 2)
     move(script[i], script[i + 1])
-}
-
-function reloadLevel() {
-  currentLevel = levels[i - 1].split("\n");
-  drawLevel(currentLevel);
-  moves = ""
-  textareaB.value = ""
 }
 
 document.getElementById("execute-script").addEventListener("click", () => {
@@ -280,6 +269,19 @@ document.getElementById("undo-move").addEventListener("click", () => {
 document.getElementById("reload-level").addEventListener("click", () => {
   reloadLevel()
 })
+
+textarea.addEventListener("input", () => {
+  currentLevel = textarea.value.split("\n")
+  drawLevel(currentLevel)
+})
+
+levelNum.oninput = () => {
+  if (levelNum.value >= levels.length || levelNum.value < 0) levelNum.value = 0
+  moves = ""
+  currentLevel = levels[levelNum.value].split("\n")
+  drawLevel(currentLevel)
+  textareaB.value = moves
+}
 
 function setCharAt(str, index, chr) {
   if (index > str.length - 1) return str;
