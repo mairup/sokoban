@@ -1,6 +1,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const textarea = document.getElementById("a");
+const textareaB = document.getElementById("b");
 let i = 1;
 let man = [0, 0];
 let moves = "";
@@ -8,12 +9,16 @@ let moves = "";
 let currentLevel = levels[0].split("\n");
 drawLevel(currentLevel);
 
-function drawLevel(level) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function drawLevel(level, prevLevel) {
+  if (!prevLevel)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
   textarea.value = "";
   for (let i = 0; i < level.length; i++) {
     for (let j = 0; j < level[i].length; j++) {
-      drawBlock(level[i][j], i, j);
+      if (!prevLevel)
+        drawBlock(level[i][j], i, j);
+      else if (prevLevel[i][j] != level[i][j])
+        drawBlock(level[i][j], i, j);
       textarea.value += currentLevel[i][j];
     }
     textarea.value += "\n"
@@ -29,6 +34,8 @@ function drawBlock(item, i, j) {
     man[0] = i;
     man[1] = j;
   }
+
+  ctx.clearRect(blockWidth * j, blockHeight * i, blockWidth, blockHeight);
 
   switch (item) {
     case "#":
@@ -72,7 +79,7 @@ function drawWall(offsetX, offsetY, width, height) {
 
 function drawMan(offsetX, offsetY, width, height) {
   ctx.beginPath();
-  ctx.fillStyle = "black";
+  ctx.fillStyle = "red";
   ctx.arc(
     offsetX + width / 2,
     offsetY + height / 2,
@@ -118,6 +125,10 @@ canvas.addEventListener("click", () => {
 })
 
 function move(type, direction) {
+  prevLevel = { ...currentLevel }
+
+  if (type == 0) type = 1;
+
   let nextPos = man.map((x) => x);
   let nextNextPos = man.map((x) => x);
   let tmpPos = man.map((x) => x);
@@ -125,24 +136,28 @@ function move(type, direction) {
 
   switch (direction) {
     case "up":
+    case "G":
       nextPos[0] -= 1;
       nextNextPos[0] -= 2;
       tmpDir = "G"
       break;
 
     case "down":
+    case "D":
       nextPos[0] += 1;
       nextNextPos[0] += 2;
       tmpDir = "D"
       break;
 
     case "left":
+    case "L":
       nextPos[1] -= 1;
       nextNextPos[1] -= 2;
       tmpDir = "L"
       break;
 
     case "right":
+    case "R":
       nextPos[1] += 1;
       nextNextPos[1] += 2;
       tmpDir = "R"
@@ -204,11 +219,11 @@ function move(type, direction) {
       break;
   }
 
-  drawLevel(currentLevel)
+  drawLevel(currentLevel, prevLevel)
   if (man[0] == tmpPos[0] && man[1] == tmpPos[1])
     moves = moves.substring(0, moves.length - 2)
 
-  console.log(moves);
+  textareaB.value = moves;
 }
 
 document.addEventListener(
@@ -238,6 +253,33 @@ document.addEventListener(
   },
   false
 );
+
+function executeScript(script) {
+  moves = "";
+  for (let i = 0; i < script.length; i += 2)
+    move(script[i], script[i + 1])
+}
+
+function reloadLevel() {
+  currentLevel = levels[i - 1].split("\n");
+  drawLevel(currentLevel);
+  moves = ""
+  textareaB.value = ""
+}
+
+document.getElementById("execute-script").addEventListener("click", () => {
+  executeScript(textareaB.value)
+})
+
+document.getElementById("undo-move").addEventListener("click", () => {
+  let tmp = moves.substring(0, moves.length - 2);
+  reloadLevel()
+  executeScript(tmp)
+})
+
+document.getElementById("reload-level").addEventListener("click", () => {
+  reloadLevel()
+})
 
 function setCharAt(str, index, chr) {
   if (index > str.length - 1) return str;
