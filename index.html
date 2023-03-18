@@ -11,16 +11,20 @@
   <body>
     <canvas id="canvas" width="1000px" height="1000px"></canvas>
     <textarea name="a" id="a" cols="30" rows="10"></textarea>
-    <textarea name="b" id="b" cols="30" rows="10"></textarea>
-    <button id="reload-level" style="height: 50px; width: 50px"></button>
+    <textarea name="b" id="b" cols="30" rows="10" value=""></textarea>
+    <button id="reload-level" style="height: 50px; width: 50px">Reset</button>
     <button
       id="undo-move"
       style="height: 50px; width: 50px; background-color: red"
-    ></button>
+    >
+      Undo
+    </button>
     <button
       id="execute-script"
-      style="height: 50px; width: 50px; background-color: green"
-    ></button>
+      style="height: 50px; width: 60px; background-color: green"
+    >
+      Execute script
+    </button>
     <input type="number" id="levelNum" style="height: 50px; width: 50px" />
     <script defer src="js/index.js"></script>
     <script src="js/levels.js"></script>

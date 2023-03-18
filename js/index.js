@@ -6,11 +6,13 @@ const levelNum = document.getElementById("levelNum");
 levelNum.value = 0;
 let man = [0, 0];
 let moves = "";
+let prevMoves = [];
 
 let currentLevel = levels[0].split("\n");
 drawLevel(currentLevel);
 
 function drawLevel(level, prevLevel) {
+  currentLevel = level
   if (!prevLevel)
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   textarea.value = "";
@@ -115,6 +117,8 @@ function drawBoxOnEndPoint(offsetX, offsetY, width, height) {
 function move(type, direction) {
   prevLevel = { ...currentLevel }
 
+  prevMoves.push([...currentLevel])
+
   if (type == 0) type = 1;
 
   let nextPos = man.map((x) => x);
@@ -208,8 +212,12 @@ function move(type, direction) {
   }
 
   drawLevel(currentLevel, prevLevel)
-  if (man[0] == tmpPos[0] && man[1] == tmpPos[1])
+  if (man[0] == tmpPos[0] && man[1] == tmpPos[1]) {
     moves = moves.substring(0, moves.length - 2)
+    prevMoves.pop();
+    textareaB.value = moves;
+  }
+
 
   textareaB.value = moves;
 }
@@ -243,15 +251,16 @@ document.addEventListener(
 );
 
 function reloadLevel() {
-  let prevLevel = { ...currentLevel }
   currentLevel = levels[levelNum.value].split("\n");
-  drawLevel(currentLevel, prevLevel);
-  moves = ""
-  textareaB.value = ""
+  drawLevel(currentLevel);
+  moves = "";
+  prevMoves = [];
+  textareaB.value = "";
 }
 
 function executeScript(script) {
   moves = "";
+  prevMoves = [];
   for (let i = 0; i < script.length; i += 2)
     move(script[i], script[i + 1])
 }
@@ -261,9 +270,12 @@ document.getElementById("execute-script").addEventListener("click", () => {
 })
 
 document.getElementById("undo-move").addEventListener("click", () => {
-  let tmp = moves.substring(0, moves.length - 2);
-  reloadLevel()
-  executeScript(tmp)
+  if (prevMoves[prevMoves.length - 1]) {
+    moves = moves.substring(0, moves.length - 2);
+    textareaB.value = moves;
+    drawLevel(prevMoves[prevMoves.length - 1], [...currentLevel])
+    prevMoves.pop()
+  }
 })
 
 document.getElementById("reload-level").addEventListener("click", () => {
@@ -278,6 +290,7 @@ textarea.addEventListener("input", () => {
 levelNum.oninput = () => {
   if (levelNum.value >= levels.length || levelNum.value < 0) levelNum.value = 0
   moves = ""
+  prevMoves = []
   currentLevel = levels[levelNum.value].split("\n")
   drawLevel(currentLevel)
   textareaB.value = moves
