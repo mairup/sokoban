@@ -1,6 +1,5 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const textarea = document.getElementById("a");
 const textareaB = document.getElementById("b");
 const levelNum = document.getElementById("levelNum");
 levelNum.value = 0;
@@ -15,16 +14,13 @@ function drawLevel(level, prevLevel) {
   currentLevel = level
   if (!prevLevel)
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  textarea.value = "";
   for (let i = 0; i < level.length; i++) {
     for (let j = 0; j < level[i].length; j++) {
       if (!prevLevel)
         drawBlock(level[i][j], i, j);
       else if (prevLevel[i][j] != level[i][j])
         drawBlock(level[i][j], i, j);
-      textarea.value += currentLevel[i][j];
     }
-    textarea.value += "\n"
   }
 }
 
@@ -121,9 +117,9 @@ function move(type, direction) {
 
   if (type == 0) type = 1;
 
-  let nextPos = man.map((x) => x);
-  let nextNextPos = man.map((x) => x);
-  let tmpPos = man.map((x) => x);
+  let nextPos = { ...man }
+  let nextNextPos = { ...man }
+  let tmpPos = { ...man }
   let tmpDir;
 
   switch (direction) {
@@ -282,10 +278,10 @@ document.getElementById("reload-level").addEventListener("click", () => {
   reloadLevel()
 })
 
-textarea.addEventListener("input", () => {
+/* textarea.addEventListener("input", () => {
   currentLevel = textarea.value.split("\n")
   drawLevel(currentLevel)
-})
+}) */
 
 levelNum.oninput = () => {
   if (levelNum.value >= levels.length || levelNum.value < 0) levelNum.value = 0
