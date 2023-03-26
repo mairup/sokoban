@@ -9,22 +9,33 @@
     <title>Sokoban game</title>
   </head>
   <body>
-    <canvas id="canvas" width="1000px" height="1000px"></canvas>
-    <textarea name="b" id="b" cols="30" rows="10" value=""></textarea>
-    <button id="reload-level" style="height: 50px; width: 50px">Reset</button>
-    <button
-      id="undo-move"
-      style="height: 50px; width: 50px; background-color: red"
-    >
-      Undo
-    </button>
-    <button
-      id="execute-script"
-      style="height: 50px; width: 60px; background-color: green"
-    >
-      Execute script
-    </button>
-    <input type="number" id="levelNum" style="height: 50px; width: 50px" />
+    <h1 class="main-title">Sokoban</h1>
+    <div id="main-container">
+      <canvas id="canvas" width="1000px" height="1000px"></canvas>
+      <div id="side-container">
+        <div class="side-item">
+          <div><img id="lower-level" src="img/left-arrow.svg" alt="" /></div>
+          <div id="levelNum2">5</div>
+          <div><img id="higher-level" src="img/right_arrow.svg" alt="" /></div>
+        </div>
+        <textarea name="b" id="b" cols="30" rows="10" value=""></textarea>
+        <div id="reload-level" class="function-button">
+          <img src="img/reset-icon.svg" alt="" />
+          Reset
+        </div>
+        <div id="undo-move" class="function-button">
+          <img src="img/reset-icon.svg" alt="" />
+          Undo
+        </div>
+        <div id="execute-script" class="function-button">
+          <img src="img/execute-icon.svg" alt="" />
+          Execute script
+        </div>
+      </div>
+      <div id="expand-button">
+        <div id="expand-icon"></div>
+      </div>
+    </div>
     <script defer src="js/index.js"></script>
     <script src="js/levels.js"></script>
   </body>

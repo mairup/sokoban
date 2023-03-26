@@ -1,12 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@500&display=swap");
+
 body {
   padding: 0;
   margin: 0;
   width: 100%;
   display: flex;
+  font-family: "Sofia Sans", sans-serif;
+  background-color: rgb(77, 77, 77);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
+
+#main-container {
+  background-color: rgb(150, 150, 150);
+  border-radius: 10px;
+  caret-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 10px 20px 5px rgba(17, 17, 17, 0.459);
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 86vh;
+  transition: width 0.3s ease;
+}
+
+#side-container {
+  width: 0vh;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  height: 90%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4%;
+}
+
+#expand-button {
+  height: 30%;
+  background-color: rgb(95, 95, 95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4vh;
+  border-radius: 10px;
+  margin-left: 2%;
+  transition: box-shadow 0.2s;
+}
+
+#expand-button:hover {
+  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.247);
+  cursor: pointer;
+}
+
+#expand-icon {
+  background-image: url("../img/right_arrow.svg");
+  background-size: contain;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
 #canvas {
-  height: 100vh;
-  background-color: beige;
+  height: 95%;
+  background-color: inherit;
   display: flex;
   align-self: center;
+  background-color: rgba(77, 77, 77, 0);
+  margin: 2% 0 2% 2%;
+}
+
+.main-title {
+  font-size: 50px;
+  font-weight: bold;
+  color: rgb(24, 24, 24);
+  width: 300px;
+  background-color: rgb(150, 150, 150);
+  display: grid;
+  place-items: center;
+  margin: 50px auto;
+  height: 100px;
+  border-radius: 10px;
+  caret-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 10px 20px 5px rgba(17, 17, 17, 0.459);
+}
+
+.expanded-main-container {
+  width: 140vh !important;
+}
+
+.expanded-side-container {
+  width: 50vh !important;
+  margin-left: 2%;
+}
+
+#b {
+  resize: none;
+  width: 90%;
+}
+
+.function-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  place-items: center;
+  border-radius: 10px;
+  width: 50%;
+  height: 10%;
+  background-color: rgb(95, 95, 95);
+  gap: 2%;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.function-button:hover {
+  box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.247);
+  cursor: pointer;
+}
+
+.side-item {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20%;
+}
+
+.function-button img {
+  width: 25px;
+}
+
+.side-item div img {
+  height: 100%;
+}
+
+.side-item div img:hover {
+  cursor: pointer;
 }

@@ -1,8 +1,9 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const textareaB = document.getElementById("b");
-const levelNum = document.getElementById("levelNum");
-levelNum.value = 0;
+const levelNum2 = document.getElementById("levelNum2");
+let levelNum = { value: 0 };
+levelNum2.innerText = 1;
 let man = [0, 0];
 let moves = "";
 let prevMoves = [];
@@ -285,6 +286,7 @@ document.getElementById("reload-level").addEventListener("click", () => {
 
 levelNum.oninput = () => {
   if (levelNum.value >= levels.length || levelNum.value < 0) levelNum.value = 0
+  levelNum2.innerText = levelNum.value + 1
   moves = ""
   prevMoves = []
   currentLevel = levels[levelNum.value].split("\n")
@@ -296,3 +298,32 @@ function setCharAt(str, index, chr) {
   if (index > str.length - 1) return str;
   return str.substring(0, index) + chr + str.substring(index + 1);
 }
+
+document.getElementById("expand-button").addEventListener("click", () => {
+  document.getElementById("side-container").classList.toggle("expanded-side-container");
+  document.getElementById("main-container").classList.toggle("expanded-main-container")
+})
+
+document.getElementById("lower-level").addEventListener("click", () => {
+  levelNum.value -= 1;
+  if (levelNum.value >= levels.length || levelNum.value < 0) levelNum.value = 0
+  levelNum2.innerText = levelNum.value + 1
+  moves = ""
+  prevMoves = []
+  currentLevel = levels[levelNum.value].split("\n")
+  drawLevel(currentLevel)
+  textareaB.value = moves
+
+})
+
+document.getElementById("higher-level").addEventListener("click", () => {
+  levelNum.value += 1;
+  if (levelNum.value >= levels.length || levelNum.value < 0) levelNum.value = 0
+  levelNum2.innerText = levelNum.value + 1
+  moves = ""
+  prevMoves = []
+  currentLevel = levels[levelNum.value].split("\n")
+  drawLevel(currentLevel)
+  textareaB.value = moves
+
+})
