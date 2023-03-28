@@ -13,11 +13,17 @@
     <div id="main-container">
       <canvas id="canvas" width="1000px" height="1000px"></canvas>
       <div id="side-container">
+        <h2>Level:</h2>
         <div class="side-item">
-          <div><img id="lower-level" src="img/left-arrow.svg" alt="" /></div>
+          <div class="level-button">
+            <img id="lower-level" src="img/left-arrow.svg" alt="" />
+          </div>
           <div id="levelNum2">5</div>
-          <div><img id="higher-level" src="img/right_arrow.svg" alt="" /></div>
+          <div class="level-button">
+            <img id="higher-level" src="img/right_arrow.svg" alt="" />
+          </div>
         </div>
+        <h2>Moves:</h2>
         <textarea name="b" id="b" cols="30" rows="10" value=""></textarea>
         <div id="reload-level" class="function-button">
           <img src="img/reset-icon.svg" alt="" />
@@ -34,6 +40,15 @@
       </div>
       <div id="expand-button">
         <div id="expand-icon"></div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-item">
+        <span id="copyright-icon">©</span>&nbsp2023 Mai Rupnik
+      </div>
+      <div class="footer-item">
+        <img src="img/link-icon.svg" alt="" />
+        <a target="_blank" href="https://github.com/mairup">Github</a>
       </div>
     </div>
     <script defer src="js/index.js"></script>

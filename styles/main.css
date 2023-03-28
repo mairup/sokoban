@@ -39,6 +39,16 @@ body {
   gap: 4%;
 }
 
+#side-container h2 {
+  font-size: 30px;
+  width: 90%;
+  display: grid;
+  place-items: center;
+  height: 40px;
+  margin: 0 auto -10px;
+  font-weight: 400;
+}
+
 #expand-button {
   height: 30%;
   background-color: rgb(95, 95, 95);
@@ -99,6 +109,7 @@ body {
 #b {
   resize: none;
   width: 90%;
+  height: 50%;
 }
 
 .function-button {
@@ -121,12 +132,29 @@ body {
   cursor: pointer;
 }
 
+.level-button:hover {
+  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.247);
+  cursor: pointer;
+}
+
 .side-item {
   display: flex;
   flex-flow: row;
   justify-content: center;
   align-items: center;
   gap: 20%;
+}
+
+.level-button {
+  display: grid;
+  place-items: center;
+  border-radius: 30px;
+  background-color: rgb(95, 95, 95);
+}
+
+#levelNum2 {
+  font-size: 25px;
+  width: 40px;
 }
 
 .function-button img {
@@ -138,5 +166,49 @@ body {
 }
 
 .side-item div img:hover {
+  cursor: pointer;
+}
+
+.footer {
+  width: 80%;
+  max-width: 1500px;
+  height: 100px;
+  border-top: rgba(200, 200, 200, 0.7) 1px solid;
+  margin-top: 100px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+}
+
+.footer-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #e4e4e4;
+}
+
+.footer-item a {
+  color: inherit;
+  font-size: 15px;
+  text-decoration: inherit;
+  transition: color 0.3s ease;
+}
+
+.footer-item a:hover {
+  color: white;
+}
+
+.footer-item a::after {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.footer-item img {
+  width: 25px;
+  margin-right: 5px;
+}
+
+#copyright-icon:hover {
   cursor: pointer;
 }
