@@ -83,7 +83,7 @@ function drawMan(offsetX, offsetY, width, height) {
   ctx.arc(
     offsetX + width / 2,
     offsetY + height / 2,
-    width / 2 - width / 4,
+    width / 2 - width / 5,
     0,
     2 * Math.PI
   );
@@ -112,6 +112,7 @@ function drawBoxOnEndPoint(offsetX, offsetY, width, height) {
 }
 
 function move(type, direction) {
+
   prevLevel = { ...currentLevel }
 
   prevMoves.push([...currentLevel])
@@ -217,6 +218,15 @@ function move(type, direction) {
 
 
   textareaB.value = moves;
+
+  if (checkCompletion())
+    Swal.fire({
+      title: 'Level completed',
+      text: 'Total moves: ' + moves.length / 2,
+      icon: 'success',
+      confirmButtonText: 'Ok',
+      confirmButtonColor: "#a5dc86",
+    })
 }
 
 document.addEventListener(
@@ -294,10 +304,6 @@ levelNum.oninput = () => {
   textareaB.value = moves
 }
 
-function setCharAt(str, index, chr) {
-  if (index > str.length - 1) return str;
-  return str.substring(0, index) + chr + str.substring(index + 1);
-}
 
 document.getElementById("expand-button").addEventListener("click", () => {
   document.getElementById("side-container").classList.toggle("expanded-side-container");
@@ -327,3 +333,15 @@ document.getElementById("higher-level").addEventListener("click", () => {
   textareaB.value = moves
 
 })
+
+function checkCompletion() {
+  let b = true;
+  for (i = 0; i < currentLevel.length; i++)
+    if (currentLevel[i].includes("Z")) b = false
+  return b;
+}
+
+function setCharAt(str, index, chr) {
+  if (index > str.length - 1) return str;
+  return str.substring(0, index) + chr + str.substring(index + 1);
+}
