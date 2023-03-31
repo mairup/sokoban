@@ -331,8 +331,17 @@ document.getElementById("higher-level").addEventListener("click", () => {
   currentLevel = levels[levelNum.value].split("\n")
   drawLevel(currentLevel)
   textareaB.value = moves
-
 })
+
+document.getElementById("copyright-icon").addEventListener("click", () => {
+  Swal.fire({
+    title: "Credits:",
+    icon: "info",
+    html: '<div style="text-align:left;line-height:25px;">2023 Mai Rupnik<br>Modified sokoban game developed for a competition</div>',
+    background: "#f6f6f6",
+    confirmButtonColor: "#3fc3ee",
+  });
+});
 
 function checkCompletion() {
   let b = true;
