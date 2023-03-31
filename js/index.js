@@ -350,6 +350,17 @@ function checkCompletion() {
   return b;
 }
 
+document.addEventListener("click", (e) => {
+  if (!document.getElementById("instructions").contains(e.target) && e.target != document.getElementById("instructions") && e.target != document.getElementById("info-icon"))
+    document.getElementById("instructions").classList.remove("showInstructions")
+})
+
+document.getElementById("info-icon").addEventListener("click", () => {
+  document.getElementById("instructions").classList.toggle("showInstructions")
+})
+
+
+
 function setCharAt(str, index, chr) {
   if (index > str.length - 1) return str;
   return str.substring(0, index) + chr + str.substring(index + 1);

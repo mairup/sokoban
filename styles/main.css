@@ -87,15 +87,34 @@ body {
   font-size: 50px;
   font-weight: bold;
   color: rgb(24, 24, 24);
-  width: 300px;
+  width: 350px;
   background-color: rgb(150, 150, 150);
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  align-items: center;
   margin: 50px auto;
   height: 100px;
   border-radius: 10px;
   caret-color: rgba(0, 0, 0, 0);
   box-shadow: 0 10px 20px 5px rgba(17, 17, 17, 0.459);
+}
+
+#info-icon {
+  border-radius: 100%;
+  background-image: url(../img/info.svg);
+  background-size: contain;
+  height: 50%;
+  aspect-ratio: 1;
+  background-color: rgba(77, 77, 77, 0);
+  box-shadow: rgba(77, 77, 77, 0) 0 0 5px 2px;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+#info-icon:hover {
+  cursor: pointer;
+  background-color: rgba(77, 77, 77, 0.2);
+  box-shadow: rgba(77, 77, 77, 0.3) 0 0 5px 2px;
 }
 
 .expanded-main-container {
@@ -155,7 +174,7 @@ body {
 
 #levelNum2 {
   font-size: 25px;
-  width: 40px;
+  width: 100px;
 }
 
 .function-button img {
@@ -212,4 +231,46 @@ body {
 
 #copyright-icon:hover {
   cursor: pointer;
+}
+
+.instructions-container {
+  z-index: -1;
+  opacity: 0;
+  position: absolute;
+  background-color: rgb(95, 95, 95);
+  border-radius: 10px;
+  caret-color: rgba(0, 0, 0, 0);
+  height: 77vh;
+  width: 77vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  transform: translateX(-2vh);
+}
+
+.instructions-line {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  margin: 40px 0;
+}
+
+.instructions-line:first-child {
+  margin: 0;
+  font-size: 30px;
+}
+
+.instructions-line img {
+  height: 180%;
+}
+
+.showInstructions {
+  opacity: 1;
+  z-index: 10;
 }

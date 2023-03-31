@@ -9,7 +9,10 @@
     <title>Sokoban game</title>
   </head>
   <body>
-    <h1 class="main-title">Sokoban</h1>
+    <h1 class="main-title">
+      Sokoban
+      <div id="info-icon" src="img/info.svg"></div>
+    </h1>
     <div id="main-container">
       <canvas id="canvas" width="1000px" height="1000px"></canvas>
       <div id="side-container">
@@ -42,6 +45,33 @@
         <div id="expand-icon"></div>
       </div>
     </div>
+
+    <div class="instructions-container" id="instructions">
+      <div class="instructions-line">Movement:</div>
+      <div class="instructions-line">
+        <div>
+          "w" - move up type 1<br />
+          "a" - move left type 1<br />
+          "s" - move down type 1<br />
+          "d" - move right type 1<br />
+        </div>
+        <div>
+          "W" - move up type 2<br />
+          "A" - move left type 2<br />
+          "S" - move down type 2<br />
+          "D" - move right type 2<br />
+        </div>
+      </div>
+      <div class="instructions-line">
+        <div>Type 1 move</div>
+        <img src="img/move1.gif" alt="" />
+      </div>
+      <div class="instructions-line">
+        <div>Type 2 move</div>
+        <img src="img/move2.gif" alt="" />
+      </div>
+    </div>
+
     <div class="footer">
       <div class="footer-item">
         <span id="copyright-icon">©</span>&nbsp2023 Mai Rupnik
