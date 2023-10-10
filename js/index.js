@@ -17,10 +17,13 @@ function drawLevel(level, prevLevel) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (let i = 0; i < level.length; i++) {
     for (let j = 0; j < level[i].length; j++) {
-      if (!prevLevel)
-        drawBlock(level[i][j], i, j);
-      else if (prevLevel[i][j] != level[i][j])
-        drawBlock(level[i][j], i, j);
+      setTimeout(() => {
+        if (!prevLevel)
+          drawBlock(level[i][j], i, j);
+        else if (prevLevel[i][j] != level[i][j])
+          drawBlock(level[i][j], i, j);
+      }, 1);
+
     }
   }
 }
@@ -310,15 +313,23 @@ document.getElementById("expand-button").addEventListener("click", () => {
   document.getElementById("main-container").classList.toggle("expanded-main-container")
 })
 
-document.getElementById("lower-level").addEventListener("click", () => {
-  levelNum.value -= 1;
-  if (levelNum.value >= levels.length || levelNum.value < 0) levelNum.value = 0
-  levelNum2.innerText = levelNum.value + 1
-  moves = ""
-  prevMoves = []
-  currentLevel = levels[levelNum.value].split("\n")
-  drawLevel(currentLevel)
-  textareaB.value = moves
+document.getElementById("lower-level").addEventListener("click", async () => {
+  setTimeout(() => {
+    levelNum.value -= 1;
+    if (levelNum.value >= levels.length)
+      levelNum.value = 0
+
+    else if (levelNum.value < 0)
+      levelNum.value = levels.length - 1
+
+    levelNum2.innerText = levelNum.value + 1
+    moves = ""
+    prevMoves = []
+    currentLevel = levels[levelNum.value].split("\n")
+    drawLevel(currentLevel)
+    textareaB.value = moves
+  }, 1);
+
 
 })
 
