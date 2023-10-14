@@ -163,6 +163,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20%;
+  user-select: none;
 }
 
 .level-button {
