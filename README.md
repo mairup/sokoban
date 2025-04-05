@@ -1,3 +1,3 @@
 Sokoban game
 
-Available at: https://mairup.github.io/sokoban/
+Available at: <a href="https://sokoban.mairup.pro/">sokoban.mairup.pro</a>
